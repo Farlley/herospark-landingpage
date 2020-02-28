@@ -17,32 +17,40 @@ const validations = {
 }
 
 const formValidate = function () {
-  let form = document.getElementById('form'),
-      inputsArr = form.querySelectorAll('input'),
-      errorMessage = undefined;
-
-  form.addEventListener('submit', function(e){
-    var i = 0;
-    while (i < inputsArr.length) {
-      var attr = inputsArr[i].getAttribute('data-validation'),
-          rules = attr ? attr.split(' ') : '',
-          parent = inputsArr[i].closest(".field"),
-          j = 0;
-      while (j < rules.length) {
-        errorMessage = parent.querySelector('.error-message')
-        if(!validations[rules[j]].valid(inputsArr[i].value)) {
-          e.preventDefault();
-          errorMessage.innerHTML = rules[j] == 'email' ? validations[rules[j]].message : validations[rules[j]].message + ' ' + inputsArr[i].name;
-          parent.className = "field error";
-          return false;
+  let form = document.getElementById('form');
+  if (form) {
+    let inputsArr = form.querySelectorAll('input'),
+        errorMessage = undefined;
+  
+    form.addEventListener('submit', function(e){
+      let errors = [];
+      var i = 0;
+      while (i < inputsArr.length) {
+        var attr = inputsArr[i].getAttribute('data-validation'),
+            rules = attr ? attr.split(' ') : '',
+            parent = inputsArr[i].closest(".field"),
+            j = 0;
+        while (j < rules.length) {
+          errorMessage = parent.querySelector('.error-message')
+          if(!validations[rules[j]].valid(inputsArr[i].value)) {
+            e.preventDefault();
+            errorMessage.innerHTML = rules[j] == 'email' ? validations[rules[j]].message : validations[rules[j]].message + ' ' + inputsArr[i].name;
+            parent.className = "field error";
+            errors.push(rules[j])
+            return false;
+          }
+          errorMessage.className = "error-message hidden";
+          parent.className = "field";
+          j++;
         }
-        errorMessage.className = "error-message hidden";
-        parent.className = "field";
-        j++;
+        i++;
       }
-      i++;
-    }
-    e.preventDefault();
-  }, false)
+  
+      if (errors.length == 0) {
+        window.location.href = 'thankyou.html'
+      }
+      e.preventDefault();
+    }, false)
+  }
 }
 formValidate();

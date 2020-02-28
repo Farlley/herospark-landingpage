@@ -390,7 +390,7 @@ footer {
     }
 
     &.thankyou {
-      height: calc(100vh - 240px);
+      min-height: calc(100vh - 240px);
       padding-bottom: 5rem;
       .ebook-presentation {
         top: -3rem;
