@@ -7,10 +7,10 @@ Tema de landing page para skills test da HeroSpark
 
 ## Instalação
 - Baixe o repositório
-- Baixe os assets com o comando `npm install`
+- Baixe os módulos com o comando `npm install`
 
 ## Gerar dist
-Para gerar os arquivos, rode o comando `npm run build`. Os arquivos serão gerados minificados.
+Para gerar os arquivos, rode o comando `npm run build`. Os arquivos serão gerados na pasta **/dist**.
 
 ## Iniciar Server Local
 Para iniciar o server local basta rodar `npm run server`.
